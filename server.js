@@ -15,7 +15,7 @@ client.connect(err => {
 
 
 //update for heroku on deployment
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -27,7 +27,8 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budgetDB", {
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/budgetDB";
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useFindAndModify: false
 });
